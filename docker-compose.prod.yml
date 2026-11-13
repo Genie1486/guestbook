@@ -1,0 +1,22 @@
+version: '3.8'                          
+
+services:                               
+  app:                                  
+    image: guestbook:1.0               
+    container_name: guestbook-app       
+    ports:                            
+     - "80:8080"            # 운영은 80포트
+    volumes:                           
+      - guestbook-data:/app/data
+    environment:                      
+      MODE: production       # ← 모드 변경
+      DEBUG: "False"         # ← 디버그 끄기
+      PORT: 8080             # ← 포트 변경                  
+    healthcheck:                      
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:                                # ③ 볼륨 목록 (볼륨마운트 쓸 때 여기 선언)
+  guestbook-data:
