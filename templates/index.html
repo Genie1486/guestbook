@@ -5,9 +5,11 @@
     <title>방명록</title>
 </head>
 <body>
-    <!-- 바인드마운트 실습: 이 제목을 로컬에서 바꿔보기 -->
     <h1>📖 방명록</h1>
-+100
+
+    <!-- ✅ 방문자 수 추가! -->
+    <p>👀 방문자 수: <b>{{ visit_count }}</b></p>
+
     <!-- 글쓰기 폼 -->
     <form action="/write" method="POST">
         <input type="text" name="name" placeholder="이름" />
