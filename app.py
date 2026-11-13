@@ -9,6 +9,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 DATA_FILE = os.path.join(DATA_DIR, "guestbook.json")
 
+# 환경변수에서 설정 읽기 (기본값 포함)
+PORT = int(os.getenv('PORT', 5000))
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+MODE = os.getenv('MODE', 'production')
 
 def load_entries():
     """방명록 데이터 불러오기"""
@@ -55,4 +59,5 @@ def health():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    print(f"🚀 Starting app in {MODE} mode on port {PORT}")
+    app.run(host='0.0.0.0', port=PORT, debug=DEBUG)

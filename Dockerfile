@@ -2,8 +2,12 @@
 FROM python:3.11-slim
 
 # 환경변수 설정
-ENV FLASK_APP=app.py    
 ENV APP_HOME=/app
+
+# 🔧 동적 설정 (기본값만 설정, 실행 시 덮어쓸 수 있음)
+ENV PORT=5000
+ENV DEBUG=False
+ENV MODE=production
 
 # 시스템 패키지 설치 (vi 편집기)
 RUN apt-get update && apt-get install -y \
