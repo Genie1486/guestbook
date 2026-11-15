@@ -15,7 +15,7 @@ services:
       PORT: ${PORT}
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${PORT}/health"]
+      test: ["CMD-SHELL", "curl", "-f", "http://localhost:${PORT}/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -27,6 +27,10 @@ services:
     container_name: guestbook-redis   # ← 이거 추가!
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data          # ← 이것만 추가!
+    command: redis-server --appendonly yes  # ← AOF 방식으로 데이터 영속성 활성화
 
 volumes:
   guestbook-data:
+  redis_data:                     # ← 볼륨 선언
